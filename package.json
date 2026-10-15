@@ -1,0 +1,13 @@
+{
+  "name": "jimkit-registry",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The list of Jimkit kits: GitHub links, and what people think of them.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "index": "node scripts/build-index.mjs"
+  }
+}

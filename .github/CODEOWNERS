@@ -1,0 +1,5 @@
+# The scripts and the database rules decide what is listed, so changes to them need a maintainer's review.
+/.github/ @The-JimmyDev
+/scripts/ @The-JimmyDev
+/tests/ @The-JimmyDev
+/package.json @The-JimmyDev

@@ -1,0 +1,37 @@
+# Rebuilds index.json (the one file Jimkit reads) from the approved kits and the reviews in the database, plus each kit's GitHub releases.
+# It runs the moment the database says something changed (a database trigger pings this workflow), every hour to pick up new releases, when the
+# scripts change, and by hand (Actions tab > Index > Run workflow). If the database can't be read the run fails and the old index.json stays.
+name: Index
+on:
+  push:
+    branches: [main]
+    paths: ["scripts/**"]
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [registry-changed]
+permissions:
+  contents: write
+concurrency: index
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+      - run: node scripts/build-index.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          # only needed for another database; the defaults are the project's own (publishable key)
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ vars.SUPABASE_KEY }}
+      - name: Commit the index if it changed
+        run: |
+          git config user.name "jimkit-registry"
+          git config user.email "noreply@users.noreply.github.com"
+          git add index.json
+          git diff --cached --quiet || (git commit -m "Update index" && git push)
