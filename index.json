@@ -1,4 +1,33 @@
 {
   "format": 1,
-  "kits": []
+  "kits": [
+    {
+      "repo": "the-jimmydev/jimkit-word-count",
+      "name": "Word count",
+      "description": "Counts words, characters, lines and reading time in any text. A small example kit with a server part.",
+      "author": "The-JimmyDev",
+      "homepage": "https://github.com/The-JimmyDev/jimkit-word-count",
+      "tools": [
+        {
+          "name": "Word count",
+          "blurb": "Words, characters, lines and reading time",
+          "icon": "PenLine"
+        }
+      ],
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "tag": "v1.0.0",
+          "sha256": "a3fc7f50bcfd185a76d92116ca76b22d27ac65e9322e0540b9aa3dcaece2cdba",
+          "size": 7513,
+          "date": "2026-10-15T14:37:38Z",
+          "server": true
+        }
+      ],
+      "rating": null,
+      "reviews": [],
+      "stars": 0
+    }
+  ]
 }
